@@ -1,0 +1,2 @@
+# the exported upstream source has no .git folder available with git-buildpackage
+0001-Build-props.patch

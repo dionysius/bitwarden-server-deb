@@ -1,0 +1,9 @@
+/var/log/bitwarden/*.log {
+       copytruncate
+       weekly
+       rotate 5
+       delaycompress
+       compress
+       notifempty
+       missingok
+}

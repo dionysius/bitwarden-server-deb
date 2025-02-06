@@ -1,0 +1,42 @@
+#!/bin/sh
+set -e
+
+# Generate Identity certificate
+if [ ! -f /etc/bitwarden/identity.pfx ]; then
+  openssl req \
+  -x509 \
+  -newkey rsa:4096 \
+  -sha256 \
+  -nodes \
+  -keyout /etc/bitwarden/identity.key \
+  -out /etc/bitwarden/identity.crt \
+  -subj "/CN=Bitwarden IdentityServer" \
+  -days 36500 2>/dev/null
+
+  openssl pkcs12 \
+  -export \
+  -out /etc/bitwarden/identity.pfx \
+  -inkey /etc/bitwarden/identity.key \
+  -in /etc/bitwarden/identity.crt \
+  -passout pass:CHANGEME!
+
+  rm /etc/bitwarden/identity.crt
+  rm /etc/bitwarden/identity.key
+fi
+
+# Generate Keys
+if grep -qF "REPLACEMEONINSTALL" /etc/default/bitwarden; then
+  sed -i "s/REPLACEMEONINSTALLINTERNALIDENTITY/$(openssl rand -hex 30)/g" /etc/default/bitwarden
+  sed -i "s/REPLACEMEONINSTALLIDENTITYCLIENT/$(openssl rand -hex 30)/g" /etc/default/bitwarden
+  sed -i "s/REPLACEMEONINSTALLDUO/$(openssl rand -hex 30)/g" /etc/default/bitwarden
+fi
+
+#DEBHELPER#
+
+chown bitwarden:bitwarden /var/lib/bitwarden \
+  /var/lib/bitwarden/attachments \
+  /var/lib/bitwarden/attachments/send \
+  /var/lib/bitwarden/data-protection \
+  /var/lib/bitwarden/licenses \
+  /var/log/bitwarden \
+  /etc/bitwarden/identity.pfx

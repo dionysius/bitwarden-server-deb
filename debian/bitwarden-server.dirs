@@ -1,0 +1,5 @@
+# https://github.com/bitwarden/self-host/blob/main/docker-unified/Dockerfile#L220
+/var/lib/bitwarden/attachments/send
+/var/lib/bitwarden/data-protection
+/var/lib/bitwarden/licenses
+/var/log/bitwarden

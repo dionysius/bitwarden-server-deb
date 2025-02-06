@@ -1,0 +1,5 @@
+etc/bitwarden/identity.pfx usr/lib/bitwarden/Identity/identity.pfx
+etc/bitwarden/identity.pfx usr/lib/bitwarden/Sso/identity.pfx
+etc/default/bitwarden etc/bitwarden/global.override.env
+etc/default/bitwarden-server etc/default/bitwarden
+var/log/bitwarden etc/bitwarden/logs

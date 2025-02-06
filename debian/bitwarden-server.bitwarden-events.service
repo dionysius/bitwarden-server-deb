@@ -1,0 +1,24 @@
+[Unit]
+Description=Bitwarden Events Server
+Documentation=https://github.com/bitwarden/server
+
+# Sqlite or remote database
+After=network.target
+
+[Service]
+# The user/group bitwarden is run under
+User=bitwarden
+Group=bitwarden
+# The location of the env file for configuration
+EnvironmentFile=/etc/default/bitwarden
+# Service listen address
+Environment="ASPNETCORE_URLS=http://localhost:5003"
+# The location of the compiled binary
+ExecStart=/usr/bin/dotnet "Events.dll"
+# Set appropriate working directory
+WorkingDirectory=/usr/lib/bitwarden/Events
+# Only allow writes to the home directory
+ReadWritePaths=/var/lib/bitwarden
+
+[Install]
+WantedBy=multi-user.target

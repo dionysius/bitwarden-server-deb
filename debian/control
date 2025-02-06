@@ -1,0 +1,28 @@
+Source: bitwarden-server
+Section: admin
+Priority: optional
+Maintainer: dionysius <dragon.dionysius@gmail.com>
+Standards-Version: 4.6.1
+Vcs-Git: https://github.com/dionysius/bitwarden-server-deb.git
+Vcs-Browser: https://github.com/dionysius/bitwarden-server-deb
+Build-Depends: debhelper-compat (= 13),
+               dh-sysuser,
+               dotnet-sdk-8.0,
+               npm,
+Homepage: https://bitwarden.com
+Rules-Requires-Root: no
+
+Package: bitwarden-server
+Architecture: any
+Depends: adduser,
+         aspnetcore-runtime-8.0,
+         bitwarden-server-web,
+         openssl,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Suggests: sqlite3 | postgresql | default-mysql-server | virtual-mysql-server | mssql-server,
+Description: Password manager server
+ Password manager for securely storing, managing, and sharing sensitive online
+ data such as passwords, passkeys, and credit cards.
+ .
+ This package contains the bitwarden server binaries

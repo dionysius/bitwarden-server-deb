@@ -1,0 +1,56 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/default.mk
+
+export DH_VERBOSE = 1
+MAKEFLAGS += --no-print-directory
+
+# use node provided by nvm if available. Remove for correct debian policy.
+# I had to make a compatibility to allow `npm` to be provided with help of `nvm` since my distro didn't provide a recent enough version. Only using official apt sources would be cleaner.
+NVM_BIN = $(shell bash -c ". $(HOME)/.nvm/nvm.sh; printenv NVM_BIN" 2>/dev/null)
+ifneq ($(NVM_BIN), "")
+export PATH := $(NVM_BIN):$(PATH)
+endif
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	mkdir -p debian/tmp
+
+	cd src/Admin; \
+		npm ci; \
+		npm run build; \
+		dotnet publish -c release -o ../../debian/tmp/Admin --no-self-contained --use-current-runtime
+	cd src/Api; \
+		dotnet publish -c release -o ../../debian/tmp/Api --no-self-contained --use-current-runtime
+	cd src/Events; \
+		dotnet publish -c release -o ../../debian/tmp/Events --no-self-contained --use-current-runtime
+	cd src/Icons; \
+		dotnet publish -c release -o ../../debian/tmp/Icons --no-self-contained --use-current-runtime
+	cd src/Identity; \
+		dotnet publish -c release -o ../../debian/tmp/Identity --no-self-contained --use-current-runtime
+	cd src/Notifications; \
+		dotnet publish -c release -o ../../debian/tmp/Notifications --no-self-contained --use-current-runtime
+	cd bitwarden_license/src/Sso; \
+		npm ci; \
+		npm run build; \
+		dotnet publish -c release -o ../../../debian/tmp/Sso --no-self-contained --use-current-runtime
+	cd bitwarden_license/src/Scim; \
+		dotnet publish -c release -o ../../../debian/tmp/Scim --no-self-contained --use-current-runtime
+
+override_dh_installsystemd:
+	dh_installsystemd --name=bitwarden-admin
+	dh_installsystemd --name=bitwarden-api
+	dh_installsystemd --name=bitwarden-events
+	dh_installsystemd --name=bitwarden-icons
+	dh_installsystemd --name=bitwarden-identity
+	dh_installsystemd --name=bitwarden-notifications
+	dh_installsystemd --name=bitwarden-scim
+	dh_installsystemd --name=bitwarden-sso
+
+override_dh_prep:
+	@:
+
+execute_after_dh_auto_install:
+	dh_sysuser

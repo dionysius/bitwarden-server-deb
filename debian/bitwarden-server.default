@@ -1,0 +1,71 @@
+# Bitwarden environment variables. See also https://bitwarden.com/help/environment-variables/
+
+# Base
+# Get your ID and key from https://bitwarden.com/host/
+globalSettings__installation__id=00000000-0000-0000-0000-000000000000
+globalSettings__installation__key=xxxxxxxxxxxx
+globalSettings__baseServiceUri__vault=https://bitwarden.yourdomain.com
+globalSettings__internalIdentityKey=REPLACEMEONINSTALLINTERNALIDENTITY
+globalSettings__oidcIdentityClientKey=REPLACEMEONINSTALLIDENTITYCLIENT
+globalSettings__duo__aKey=REPLACEMEONINSTALLDUO
+
+# Cloud
+globalSettings__enableCloudCommunication=true
+globalSettings__baseServiceUri__cloudRegion=EU
+globalSettings__installation__identityUri=https://identity.bitwarden.eu
+globalSettings__installation__apiUri=https://api.bitwarden.eu
+globalSettings__pushRelayBaseUri=https://push.bitwarden.eu
+
+# Services
+globalSettings__baseServiceUri__internalAdmin=http://localhost:5000
+globalSettings__baseServiceUri__internalApi=http://localhost:5001
+globalSettings__baseServiceUri__internalEvents=http://localhost:5003
+globalSettings__baseServiceUri__internalIcons=http://localhost:5004
+globalSettings__baseServiceUri__internalIdentity=http://localhost:5005
+globalSettings__baseServiceUri__internalNotifications=http://localhost:5006
+globalSettings__baseServiceUri__internalSso=http://localhost:5007
+globalSettings__baseServiceUri__internalScim=http://localhost:5002
+globalSettings__baseServiceUri__internalVault=http://localhost:8080
+
+# Files/Dirs
+globalSettings__dataProtection__directory=/var/lib/bitwarden/data-protection
+globalSettings__attachment__baseDirectory=/var/lib/bitwarden/attachments
+globalSettings__send__baseDirectory=/var/lib/bitwarden/attachments/send
+globalSettings__licenseDirectory=/var/lib/bitwarden/licenses
+globalSettings__logDirectoryByProject=false
+globalSettings__logRollBySizeLimit=1073741824
+
+# Database
+# Available providers are sqlserver, postgresql, mysql/mariadb, or sqlite
+globalSettings__databaseProvider=sqlite
+# globalSettings__mysql__connectionString="server=db.yourdomain.com;port=3306;database=bitwarden_vault;user=bitwarden;password=super_strong_password"
+# globalSettings__postgreSql__connectionString="Host=db.yourdomain.com;Port=5432;Database=bitwarden_vault;Username=bitwarden;Password=super_strong_password"
+# globalSettings__sqlServer__connectionString="Server=db.yourdomain.com,1433;Database=bitwarden_vault;User Id=bitwarden;Password=super_strong_password;Encrypt=True;TrustServerCertificate=True"
+globalSettings__sqlite__connectionString="Data Source=/var/lib/bitwarden/db.sqlite3;"
+
+# Mail
+#adminSettings__admins=admin1@email.com,admin2@email.com
+#globalSettings__mail__replyToEmail=noreply@bitwarden.yourdomain.com
+#globalSettings__mail__smtp__host=smtphost.example.com
+#globalSettings__mail__smtp__port=587
+#globalSettings__mail__smtp__ssl=false
+#globalSettings__mail__smtp__username=smtpusername
+#globalSettings__mail__smtp__password=smtppassword
+
+# Yubikey
+#globalSettings__yubico__clientId=REPLACE
+#globalSettings__yubico__key=REPLACE
+
+# Other
+globalSettings__selfHosted=true
+globalSettings__unifiedDeployment=true
+#globalSettings__disableUserRegistration=false
+#globalSettings__hibpApiKey=REPLACE
+#globalSettings__sso__enforceSsoPolicyForAllUsers=false
+#globalSettings__send__baseDirectory=
+globalSettings__identityServer__certificatePassword=CHANGEME!
+
+# Aspnet/Dotnet
+ASPNETCORE_ENVIRONMENT=Production
+DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+DOTNET_RUNNING_IN_CONTAINER=true

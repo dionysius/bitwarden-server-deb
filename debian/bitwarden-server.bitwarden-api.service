@@ -1,0 +1,40 @@
+[Unit]
+Description=Bitwarden Api Server
+Documentation=https://github.com/bitwarden/server
+
+# Sqlite or remote database
+After=network.target
+
+# MariaDB
+# After=network.target mariadb.service
+# Requires=mariadb.service
+
+# Mysql
+# After=network.target mysqld.service
+# Requires=mysqld.service
+
+# PostgreSQL
+# After=network.target postgresql.service
+# Requires=postgresql.service
+
+# MSSQL
+# After=network.target UNKNOWN
+# Requires=UNKNOWN
+
+[Service]
+# The user/group bitwarden is run under
+User=bitwarden
+Group=bitwarden
+# The location of the env file for configuration
+EnvironmentFile=/etc/default/bitwarden
+# Service listen address
+Environment="ASPNETCORE_URLS=http://localhost:5001"
+# The location of the compiled binary
+ExecStart=/usr/bin/dotnet "Api.dll"
+# Set appropriate working directory
+WorkingDirectory=/usr/lib/bitwarden/Api
+# Only allow writes to the home directory
+ReadWritePaths=/var/lib/bitwarden
+
+[Install]
+WantedBy=multi-user.target

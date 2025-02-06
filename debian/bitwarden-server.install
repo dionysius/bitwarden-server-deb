@@ -1,0 +1,5 @@
+debian/bitwarden.nginx.conf usr/share/bitwarden/nginx
+debian/tmp/* /usr/lib/bitwarden
+util/Nginx/proxy.conf usr/share/bitwarden/nginx
+util/Nginx/security-headers-ssl.conf usr/share/bitwarden/nginx
+util/Nginx/security-headers.conf usr/share/bitwarden/nginx
