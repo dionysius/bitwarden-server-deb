@@ -30,3 +30,8 @@ For manual installation they are available in the [releases section](https://git
 - Build with git-buildpackage: `gbp buildpackage`
   - There are many arguments to fine-tune the build (see `gbp buildpackage --help` and `dpkg-buildpackage --help`)
   - Notable options: `-b` (binary-only, no source files), `-us` (unsigned source package), `-uc` (unsigned .buildinfo and .changes file), `--git-export-dir=<somedir>` (before building the package export the source there), `-d` if you need to ignore build-depends (you probably still need them installed from a debian package)
+
+## After Installation
+
+- Configure bitwarden environment variables in `/etc/default/bitwarden`.
+- You need to setup a reverse proxy binding all the bitwarden services together. There are example nginx config files in `/usr/share/bitwarden/nginx` to get you started. SSL seems to be required for the web frontend to function properly (Browsers may restrict the usage of WebCryptographyApi to secure origins).
