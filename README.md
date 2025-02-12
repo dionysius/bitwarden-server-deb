@@ -13,8 +13,8 @@ For manual installation they are available in the [releases section](https://git
 ## Requirements
 
 - Installed `git-buildpackage` from your apt
-- Add the [.NET apt repository from Microsoft](https://learn.microsoft.com/en-us/dotnet/core/install/linux-debian).
-  - Ubuntu users [can just use the existing packages by Canonical](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu)
+- Add the [.NET apt repository](https://learn.microsoft.com/en-us/dotnet/core/install/linux-debian) from Microsoft
+  - Ubuntu users can skip this, there are [existing packages](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu) by Canonical
 - Installed build dependencies as defined in [debian/control `Build-Depends`](debian/control) (will notify you in the build process otherwise)
   - [`mk-build-deps`](https://manpages.debian.org/testing/devscripts/mk-build-deps.1.en.html) can help you automate the installation
 - If `nodejs`/`npm` is not recent enough
@@ -31,7 +31,14 @@ For manual installation they are available in the [releases section](https://git
   - There are many arguments to fine-tune the build (see `gbp buildpackage --help` and `dpkg-buildpackage --help`)
   - Notable options: `-b` (binary-only, no source files), `-us` (unsigned source package), `-uc` (unsigned .buildinfo and .changes file), `--git-export-dir=<somedir>` (before building the package export the source there), `-d` if you need to ignore build-depends (you probably still need them installed from a debian package)
 
-## After Installation
+## Installation
+
+Before installing:
+
+- Add the [.NET apt repository](https://learn.microsoft.com/en-us/dotnet/core/install/linux-debian) from Microsoft (if not already done)
+  - Ubuntu users can skip this, there are [existing packages](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu) by Canonical
+
+After installing:
 
 - Configure bitwarden environment variables in `/etc/default/bitwarden`.
 - You need to setup a reverse proxy binding all the bitwarden services together. There are example nginx config files in `/usr/share/bitwarden/nginx` to get you started. SSL seems to be required for the web frontend to function properly (Browsers may restrict the usage of WebCryptographyApi to secure origins).
