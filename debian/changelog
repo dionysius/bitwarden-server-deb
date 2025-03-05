@@ -1,3 +1,9 @@
+bitwarden-server (2025.2.3-0) unstable; urgency=medium
+
+  * update to v2025.2.3, see also: https://github.com/bitwarden/server/releases/tag/v2025.2.3
+
+ -- dionysius <dragon.dionysius@gmail.com>  Thu, 06 Mar 2025 00:47:42 +0100
+
 bitwarden-server (2025.2.1-0) unstable; urgency=medium
 
   * update to v2025.2.1, see also: https://github.com/bitwarden/server/releases/tag/v2025.2.1
